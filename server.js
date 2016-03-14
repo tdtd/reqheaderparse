@@ -12,7 +12,7 @@ app.use(express.static(path.resolve(__dirname, 'client')));
 
 app.get('/whoami', function(req,res) {
 	var whoami = {};
-	whoami.ipaddress = req.ip;
+	whoami.ipaddress = req.ip.match(/\:(?=[^:]*$)(.*)/)[1];
 	whoami.language = formatLanguage(req.headers["accept-language"]);
 	whoami.software = req.headers["user-agent"].match(/\((.*?)\)/i)[1];
 	res.json(whoami);
